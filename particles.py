@@ -25,13 +25,10 @@ class FireParticle(Particle):
 
     def update(self, wind: float):
         super().update(wind)
-       
         noise_offset = global_noise.get_noise(self.time_alive + self.y) * 2
-        
         self.x += self.vel_x + (wind * 15) + noise_offset
         self.y += self.vel_y
         self.life -= 0.03 + (wind * 0.05)
-        
         self.color[1] = max(0, self.color[1] - 5)
         if self.life < 0.4:
             self.color[0] = max(100, self.color[0] - 5)
@@ -72,13 +69,13 @@ class ParticleSystem:
     def __init__(self):
         self.particles = []
         
-    def emit_fire(self, x, y, count=5):
+    def emit_fire(self, x, y, count=5, dx=0):
         for _ in range(count):
-            self.particles.append(FireParticle(x, y))
+            self.particles.append(FireParticle(x + dx, y))
             
-    def emit_smoke(self, x, y, count=1):
+    def emit_smoke(self, x, y, count=1, dx=0):
         for _ in range(count):
-            self.particles.append(SmokeParticle(x, y))
+            self.particles.append(SmokeParticle(x + dx, y))
             
     def update_and_draw(self, surface, wind: float):
         for p in self.particles[:]:
