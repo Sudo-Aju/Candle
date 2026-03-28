@@ -21,12 +21,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pygame numpy pyinstaller
-          pip install pyaudio --find-links https://github.com/nickel-lang/pyaudio-wheels/releases/download/v0.2.14/PyAudio-0.2.14-cp311-cp311-win_amd64.whl
+          pip install pyaudio pygame numpy pyinstaller
 
-      - name: Build EXE with PyInstaller
+      - name: Verify pyaudio installs correctly
+        run: python -c "import pyaudio; print('pyaudio ok')"
+
+      - name: Build EXE with spec file
         run: |
-          pyinstaller --onefile --windowed --name "BirthdayCandle" --hidden-import pyaudio main.py
+          pyinstaller BirthdayCandle.spec
 
       - name: Upload EXE as artifact
         uses: actions/upload-artifact@v4

@@ -11,6 +11,10 @@ A birthday-themed python program where you literally **blow into your mic** (it 
 the flame reacts to how hard you blow in real time, particles move with organic perlin-style noise so it looks actually alive. when you blow hard enough the candle goes out with a poof of smoke, confetti explodes everywhere, and you can relight it and do it again. you can also tweak the mic sensitivity and screen size in `settings.json` if the blowing aint registering right.
 
 ---
+# Demo
+https://github.com/user-attachments/assets/e429d569-477e-4752-8993-b96b9e978297
+
+---
 
 ## Download for Windows (no Python needed!)
 
