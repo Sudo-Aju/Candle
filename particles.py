@@ -1,6 +1,7 @@
 import pygame
 import random
 import math
+from utils import global_noise
 
 class Particle:
     def __init__(self, x, y):
@@ -24,7 +25,10 @@ class FireParticle(Particle):
 
     def update(self, wind: float):
         super().update(wind)
-        self.x += self.vel_x + (wind * 15)
+       
+        noise_offset = global_noise.get_noise(self.time_alive + self.y) * 2
+        
+        self.x += self.vel_x + (wind * 15) + noise_offset
         self.y += self.vel_y
         self.life -= 0.03 + (wind * 0.05)
         
@@ -50,7 +54,6 @@ class SmokeParticle(Particle):
 
     def update(self, wind: float):
         super().update(wind)
-        # Basic sine wave for smoke curling
         self.x += (math.sin(self.time_alive) * 1.5) + self.vel_x + (wind * 5)
         self.y += self.vel_y
         if self.radius < self.max_radius:

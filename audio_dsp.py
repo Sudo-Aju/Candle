@@ -3,13 +3,14 @@ import numpy as np
 from collections import deque
 
 class AudioProcessor:
+    """Handles raw audio stream and converts amplitude to a usable wind float."""
     def __init__(self, config):
         self.config = config
         self.p = pyaudio.PyAudio()
         self.stream = self.p.open(format=pyaudio.paInt16, channels=1, rate=44100,
                                   input=True, frames_per_buffer=1024)
         self.threshold = self.config.settings["MIC_THRESHOLD"]
-        self.history = deque(maxlen=10)
+        self.history = deque(maxlen=10) 
 
     def get_blow_intensity(self) -> float:
         try:

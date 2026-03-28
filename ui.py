@@ -7,10 +7,9 @@ class UIManager:
         pygame.font.init()
         self.font = pygame.font.SysFont("Arial", 24)
         self.title_font = pygame.font.SysFont("Arial", 48, bold=True)
-        self.display_intensity = 0.0
+        self.display_intensity = 0.0 
 
     def draw_meter(self, surface, current_intensity, limit):
-        
         self.display_intensity += (current_intensity - self.display_intensity) * 0.1
         
         bar_width = 300
