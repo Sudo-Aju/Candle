@@ -23,12 +23,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyaudio pygame numpy pyinstaller
 
-      - name: Verify pyaudio installs correctly
-        run: python -c "import pyaudio; print('pyaudio ok')"
+      - name: Verify pyaudio
+        run: python -c "import pyaudio; print('pyaudio installed ok')"
 
-      - name: Build EXE with spec file
+      - name: Build EXE
         run: |
-          pyinstaller BirthdayCandle.spec
+          pyinstaller --onefile --windowed --name "BirthdayCandle" --hidden-import pyaudio --collect-binaries pyaudio main.py
 
       - name: Upload EXE as artifact
         uses: actions/upload-artifact@v4
